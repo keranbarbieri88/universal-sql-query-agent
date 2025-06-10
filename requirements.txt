@@ -1,0 +1,28 @@
+# Web Framework
+streamlit==1.32.0
+
+# Database
+pyodbc==5.0.1
+mysql-connector-python==8.3.0
+psycopg2-binary==2.9.9
+
+# AI/ML
+openai==1.12.0
+langchain==0.1.9
+
+# Environment Variables
+python-dotenv==1.0.1
+
+# Data Processing
+pandas==2.2.1
+numpy==1.26.4
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2024.1
+requests==2.31.0
+
+# Development
+black==24.2.0
+pylint==3.0.3
+pytest==8.0.2 

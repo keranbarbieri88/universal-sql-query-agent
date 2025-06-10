@@ -1,346 +1,116 @@
-# Agente SQL Universal para Consultas 
+# Universal SQL Query Agent 🤖
 
-Este proejto foi criado com o intuito de auxíliar desenvolvedores com a criação e manipulação de consulas SQL, independe do SGDB que utilizarem.
+Um agente de IA que traduz perguntas em linguagem natural para consultas SQL e as executa em bancos de dados configurados.
 
-## Stack utilizada
+## 🚀 Funcionalidades
 
-**Front-end:** React, Redux, TailwindCSS
+- Interface web intuitiva para entrada de perguntas
+- Tradução automática de linguagem natural para SQL
+- Suporte a múltiplos bancos de dados (MySQL, PostgreSQL, SQL Server)
+- Visualização de resultados em formato tabular
+- Geração segura de queries SQL
+- Interface amigável e responsiva
 
-**Back-end:** Python, Express
+## 📋 Pré-requisitos
 
-## Guia de Instalação
+- Python 3.8+
+- Google Chrome (ou outro navegador moderno)
+- Conexão com banco de dados configurada
+- Chave de API da OpenAI
 
-📋 Pré-requisitos
+## 🔧 Instalação
 
-* Python 3.8 ou superior
-* Chave da API OpenAI
-* Banco(s) de dados para conectar
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/universal-sql-query-agent.git
+cd universal-sql-query-agent
+```
 
-**1. Clone/Baixe os arquivos**
-
-Certifique-se de ter os seguintes arquivos:
-
-universal_sql_agent.py (código principal)
-sql_agent_config.py (configuração e exemplos)
-requirements.txt (dependências)
-
-**2. Instale as dependências**
-
+2. Instale as dependências:
 ```bash
 pip install -r requirements.txt
 ```
 
-**3. Configure as variáveis de ambiente**
+3. Configure as variáveis de ambiente:
+Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+```env
+OPENAI_API_KEY=sua_chave_api_aqui
+DB_HOST=localhost
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+DB_DB=seu_banco
+```
 
-💻 Linux/Mac:
+## 🚀 Como Executar
+
+### Windows
+Execute o arquivo `run.bat` com duplo clique ou via terminal:
 ```bash
-export OPENAI_API_KEY="sua-chave-openai-aqui"
-export MYSQL_PASSWORD="sua-senha-mysql"
-export POSTGRES_PASSWORD="sua-senha-postgres"
+.\run.bat
 ```
 
-💻 Windows:
+### Linux/Mac
+Execute o script shell:
 ```bash
-set OPENAI_API_KEY=sua-chave-openai-aqui
-set MYSQL_PASSWORD=sua-senha-mysql
-set POSTGRES_PASSWORD=sua-senha-postgres
+chmod +x run.sh
+./run.sh
 ```
 
-Ou crie um arquivo `.env`:
-
-`OPENAI_API_KEY`=sua-chave-openai-aqui
-
-`MYSQL_PASSWORD`=sua-senha-mysql
-
-`POSTGRES_PASSWORD`=sua-senha-postgres
-
-`MYSQL_CONNECTION_STRING`=mysql://user:pass@host:port/db
-
-`POSTGRES_CONNECTION_STRING`=postgresql://user:pass@host:port/db
-
-
-
-📦 Requirements.txt
+### Execução Manual
+1. Inicie o servidor Streamlit:
+```bash
+streamlit run src/interface/app.py
 ```
-openai>=1.0.0
-sqlalchemy>=2.0.0
-pandas>=1.5.0
-python-dotenv>=1.0.0
-```
+2. Abra seu navegador e acesse: `http://localhost:8501`
 
+## 📁 Estrutura do Projeto
 
-## Drivers de banco de dados
 ```
-pymysql>=1.0.2          # MySQL
-psycopg2-binary>=2.9.0  # PostgreSQL
-pyodbc>=4.0.0           # SQL Server
-cx-Oracle>=8.0.0        # Oracle (opcional)
+universal-sql-query-agent/
+├── src/
+│   ├── adapters/         # Adaptadores para diferentes serviços
+│   ├── config/           # Configurações da aplicação
+│   ├── interface/        # Interface web (Streamlit)
+│   └── use_cases/        # Casos de uso da aplicação
+├── .env                  # Variáveis de ambiente
+├── requirements.txt      # Dependências do projeto
+├── run.bat              # Script de execução (Windows)
+└── run.sh               # Script de execução (Linux/Mac)
 ```
 
-# Documentação do projeto
+## 💻 Como Usar
 
-## Visão Geral do Projeto
+1. Acesse a interface web em `http://localhost:8501`
+2. Digite sua pergunta em linguagem natural no campo de texto
+3. O sistema irá:
+   - Analisar sua pergunta
+   - Gerar a consulta SQL correspondente
+   - Executar a consulta no banco de dados
+   - Exibir os resultados em formato tabular
 
-`Objetivo`: Criar um agente de IA que recebe perguntas em linguagem natural, traduz para SQL e executa em qualquer banco de dados configurado.
+## 🔒 Segurança
 
-## Levantamento de requisitos
-O levantamento de requisitos aborda o mapamento das funcionalidades da aplicação. 
+- Todas as queries são validadas antes da execução
+- Comandos perigosos (DELETE, DROP, etc.) são bloqueados
+- Credenciais do banco de dados são armazenadas de forma segura
+- Conexões são gerenciadas com timeout
 
-### 📋 Requisitos Funcionais
-* RF001 - Conexão Multi-Banco
+## 🤝 Contribuindo
 
-    Descrição: O sistema deve conectar-se a diferentes SGBDs
-    Critério de Aceitação:
+1. Faça um Fork do projeto
+2. Crie uma Branch para sua Feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a Branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
-    Suportar MySQL, PostgreSQL, SQLite, SQL Server
-    Validar credenciais antes da conexão
-    Exibir status de conexão claramente
+## 📝 Licença
 
-    Prioridade: ALTA
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-* RF002 - Análise de Schema
+## 📧 Contato
 
-    Descrição: Extrair e analisar estrutura do banco conectado
-    Critério de Aceitação:
+Seu Nome - [@seu_twitter](https://twitter.com/seu_twitter) - email@exemplo.com
 
-    Listar todas as tabelas e colunas
-    Identificar chaves primárias e estrangeiras
-    Detectar tipos de dados e constraints
-    Obter dados de exemplo (3-5 registros por tabela)
+Link do Projeto: [https://github.com/seu-usuario/universal-sql-query-agent](https://github.com/seu-usuario/universal-sql-query-agent)
 
 
-    Prioridade: ALTA
-
-* RF003 - Tradução Natural → SQL
-
-    Descrição: Converter perguntas em português para SQL válido
-    Critério de Aceitação:
-
-    Interpretar perguntas em linguagem natural
-    Gerar SQL sintaticamente correto
-    Considerar dialetos específicos de cada SGBD
-    Taxa de sucesso ≥ 80% em cenários básicos
-
-
-    Prioridade: ALTA
-
-* RF004 - Execução de Consultas
-
-    Descrição: Executar SQL gerado e retornar resultados
-    Critério de Aceitação:
-
-    Executar queries sem alterar dados (somente SELECT)
-    Retornar resultados em formato estruturado
-    Limitar resultados para evitar sobrecarga
-    Tratar erros de execução graciosamente
-
-
-    Prioridade: ALTA
-
-*RF005 - Interface de Usuário
-
-    Descrição: Fornecer interface amigável para interação
-    Critério de Aceitação:
-
-    Interface web responsiva
-    Chat conversacional
-    Visualização de resultados em tabela
-    Histórico de consultas
-
-
-    Prioridade: MÉDIA
-
-* RF006 - Exportação de Dados
-
-    Descrição: Permitir exportar resultados
-    Critério de Aceitação:
-
-    Exportar para CSV, Excel, JSON
-    Manter formatação original dos dados
-    Incluir metadados da consulta
-
-
-    Prioridade: BAIXA
-
-* RF007 - Sugestões Inteligentes
-
-    Descrição: Oferecer sugestões baseadas no schema
-    Critério de Aceitação:
-
-    Sugerir perguntas baseadas nas tabelas disponíveis
-    Auto-completar nomes de tabelas/colunas
-    Detectar intenções ambíguas e pedir clarificação
-
-
-    Prioridade: BAIXA
-
-* RF008 - Auditoria e Logs
-
-    Descrição: Registrar todas as operações realizadas
-    Critério de Aceitação:
-
-    Log de todas as consultas executadas
-    Registro de conexões e desconexões
-    Tempo de resposta de cada operação
-
-
-    Prioridade: MÉDIA
-
-
-### 🔧 Requisitos Não-Funcionais
-* RNF001 - Performance
-
-    Descrição: Sistema deve responder rapidamente
-    Métricas:
-
-    Tempo de resposta ≤ 5 segundos para consultas simples
-    Tempo de resposta ≤ 15 segundos para consultas complexas
-    Suporte a até 50 consultas simultâneas
-
-
-    Prioridade: ALTA
-
-* RNF002 - Segurança
-
-    Descrição: Proteger credenciais e dados sensíveis
-    Critérios:
-
-    Criptografar credenciais em repouso
-    Não executar comandos DDL/DML destrutivos
-    Sanitizar inputs para prevenir SQL Injection
-    Autenticação obrigatória para acesso
-
-
-    Prioridade: ALTA
-
-* RNF003 - Escalabilidade
-
-    Descrição: Sistema deve escalar conforme demanda
-    Critérios:
-
-    Arquitetura modular e extensível
-    Suporte a pool de conexões
-    Cache de schemas para reduzir latência
-
-
-    Prioridade: MÉDIA
-
-* RNF004 - Disponibilidade
-
-    Descrição: Sistema deve estar sempre disponível
-    Métricas:
-
-    Uptime ≥ 99.5%
-    Recuperação automática de falhas
-    Timeout configurável para conexões
-
-
-    Prioridade: MÉDIA
-
-* RNF005 - Usabilidade
-
-    Descrição: Interface intuitiva para usuários não-técnicos
-    Critérios:
-
-    Interface em português brasileiro
-    Mensagens de erro claras e acionáveis
-    Documentação integrada
-    Tutoriais interativos
-
-
-    Prioridade: ALTA
-
-* RNF006 - Compatibilidade
-
-    Descrição: Funcionar em diferentes ambientes
-    Critérios:
-
-    Compatível com Python 3.8+
-    Suporte a principais navegadores web
-    Funcionamento em Windows, Linux, macOS
-
-
-    Prioridade: MÉDIA
-
-* RNF007 - Manutenibilidade
-
-    Descrição: Código fácil de manter e evoluir
-    Critérios:
-
-    Cobertura de testes ≥ 80%
-    Documentação técnica completa
-    Padrões de código consistentes
-    Arquitetura modular
-
-
-    Prioridade: MÉDIA
-
-## 🏗️ Arquitetura do Sistema
-
-Arquitetura em Camadas
-
-|CAMADA DE APRESENTAÇÃO              |
-| ---------------------------------- | 
-| Interface Web (React/Flask)        |
-| API REST                           |
-| CLI Interface                      |
-
-|CAMADA DE NEGÓCIO                   |
-| ---------------------------------- | 
-| Universal SQL Agent                |
-| NL to SQL Translator               |
-| Query Validator                    |
-| Result Formatter                   |
-
-|CAMADA DE DADOS                     |
-| ---------------------------------- | 
-| Database Connectors                |
-| Schema Analyzer                    |
-| Connection Pool Manager            |
-| Cache Layer (Redis)                |
-
-|CAMADA DE PERSISTÊNCIA              |
-| ---------------------------------- | 
-| PostgreSQL                         |
-| SQL Server                         |
-| MySQL                              |
-| SQLite                             |
-
-## Componentes Principais
-1. Universal SQL Agent (Orquestrador)
-
-Coordena todo o fluxo de processamento
-Gerencia estado das conexões
-Controla timeouts e retry logic
-
-2. NL to SQL Translator (IA)
-
-Integração com OpenAI GPT
-Processamento de linguagem natural
-Geração de SQL contextualizado
-
-3. Database Connectors (Adaptadores)
-
-Padrão Strategy para diferentes SGBDs
-Abstração de diferenças entre dialetos
-Pool de conexões otimizado
-
-4. Schema Analyzer (Metadados)
-
-Extração de estrutura do banco
-Cache de metadados
-Análise de relacionamentos
-
-5. Security Layer (Segurança)
-
-Validação de queries
-Prevenção de SQL Injection
-Controle de acesso
-
-## Padrões de Design Utilizados
-
-* Strategy Pattern: Para conectores de banco
-* Factory Pattern: Para criação de conexões
-* Adapter Pattern: Para diferentes interfaces de DB
-* Observer Pattern: Para logs e auditoria
-* Command Pattern: Para execução de queries
